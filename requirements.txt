@@ -1,0 +1,11 @@
+asgiref==3.8.1  # Для поддержки асинхронности в Django (внутренний механизм)
+Django==5.2.1  # Сам фреймворк Django
+django-cors-headers==4.7.0  # Обработка CORS (нужна, если будет фронт на другом домене)
+djangorestframework==3.16.0  # Django REST Framework — для создания API
+djangorestframework_simplejwt==5.5.0  # JWT-аутентификация
+psycopg2-binary==2.9.10  # Драйвер для подключения к PostgreSQL
+PyJWT==2.9.0  # Работа с JWT-токенами (используется внутри simplejwt)
+python-decouple==3.8  # Загрузка переменных из .env (если используем)
+sqlparse==0.5.3  # Парсинг SQL-запросов, используется Django
+pytest>=7.4.0
+pytest-django>=4.5.2
