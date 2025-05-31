@@ -1,1 +1,0 @@
-from .product_permissions import IsAdminOrReadOnly

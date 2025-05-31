@@ -8,13 +8,11 @@ class OrderCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['products', 'status', 'created_at']
+        fields = ['products', 'quantity', 'status', 'created_at']
         read_only_fields = ['status', 'created_at']
-    
+
     def create(self, validated_data):
         products = validated_data.pop('products')
         order = Order.objects.create(**validated_data)
         order.products.set(products)
         return order
-    
-    

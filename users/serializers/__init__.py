@@ -1,5 +1,0 @@
-from .registration import RegistrationSerializer
-from .login import LoginSerializer
-from .profile import ProfileSerializer
-from .password_change import PasswordChangeSerializer
-from .password_reset import PasswordResetConfirmSerializer, PasswordResetRequestSerializer

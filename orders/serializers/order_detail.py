@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-class UserDetailSerializer(serializers.ModelSerializer):
+class UserDetailSerializer(serializers.Serializer):
     class Meta:
         model = User
         fields = ['id', 
@@ -15,15 +15,17 @@ class UserDetailSerializer(serializers.ModelSerializer):
                   'last_name'
         ]
 
-class OrderDetailSerializer(serializers.ModelSerializer):
+class OrderDetailSerializer(serializers.ModelSeriliazer):
     products = ProductSerializer(many=True, read_only=True)
     user = UserDetailSerializer(read_only=True)
 
     class Meta:
-        model = Order
+        model = User
         fields = ['id',
                   'products',
+                  'quantity',
                   'status',
                   'created_at',
+                  'updated_at',
                   'user'
                   ]

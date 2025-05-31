@@ -4,7 +4,7 @@ from orders.models import Order
 class OrderUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['status']
+        fields = ['status', 'quantity']
 
         def validate_quantity(self, value):
             if value <= 0:
