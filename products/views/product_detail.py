@@ -1,7 +1,7 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView #type:ignore
 from rest_framework.permissions import IsAdminUser, AllowAny #type:ignore
 from products.models import Product
-from products.serializers.product import ProductSerializer
+from products.serializers import ProductSerializer
 
 class ProductDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()

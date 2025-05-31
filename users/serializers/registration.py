@@ -6,10 +6,12 @@ from django.core.validators import validate_email
 User = get_user_model()
 
 class RegistrationSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    username = serializers.CharField(required=False, allow_blank=True)
     email = serializers.EmailField()
     password = serializers.CharField(min_length=6, write_only=True)
     password_confirm = serializers.CharField(write_only=True)
+    first_name = serializers.CharField(min_length=2)
+    last_name = serializers.CharField(min_length=2)
 
     def validate_email(self, value):
         validate_email(value)
@@ -34,6 +36,8 @@ class RegistrationSerializer(serializers.Serializer):
         user = User.objects.create_user(
             username = validated_data['username'],
             email = validated_data['email'],
-            password = validated_data['password']
+            password = validated_data['password'],
+            first_name = validated_data['first_name'],
+            last_name = validated_data['last_name'],
         )
         return user

@@ -1,0 +1,1 @@
+from .users_permissions import IsAdmin, IsSelfOrAdmin

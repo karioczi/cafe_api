@@ -1,7 +1,7 @@
 from rest_framework import generics #type:ignore
 from rest_framework.permissions import IsAuthenticated #type:ignore
 from orders.models import Order
-from orders.serializers.order_update import  OrderUpdateSerializer
+from orders.serializers import OrderUpdateSerializer
 
 class OrderUpdateView(generics.UpdateAPIView):
     queryset = Order.objects.all()
