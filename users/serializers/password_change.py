@@ -2,8 +2,8 @@ from rest_framework import serializers #type:ignore[import]
 from django.contrib.auth.password_validation import validate_password
 
 class PasswordChangeSerializer(serializers.Serializer):
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True, validators=[validate_password])
+    old_password = serializers.CharField(required=True, write_only=True)
+    new_password = serializers.CharField(required=True, validators=[validate_password], write_only=True)
 
     def validate_old_password(self, value):
         user = self.context['request'].user

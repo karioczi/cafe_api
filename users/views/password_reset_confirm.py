@@ -9,6 +9,8 @@ from users.serializers.password_reset import PasswordResetConfirmSerializer
 User = get_user_model()
 
 class PasswordResetConfirmView(APIView):
+    permission_classes = []
+
     def post(self, request):
         serializer = PasswordResetConfirmSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -16,7 +18,7 @@ class PasswordResetConfirmView(APIView):
         try:
             uid = urlsafe_base64_decode(serializer.validated_data['uidb64']).decode()
             user = User.objects.get(pk=uid)
-        except (User.DoesNotExist, ValueError, TypeError):
+        except (User.DoesNotExist, ValueError, TypeError, UnicodeDecodeError):
             return Response(
                 {'detail': 'Invalid user'}, 
                 status=status.HTTP_400_BAD_REQUEST
@@ -24,7 +26,7 @@ class PasswordResetConfirmView(APIView):
         
         if not default_token_generator.check_token(user, serializer.validated_data['token']):
             return Response(
-                {'detail': 'Invalid or expaired token'}, 
+                {'detail': 'Invalid or expired token'}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
         

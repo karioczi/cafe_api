@@ -2,26 +2,25 @@ from rest_framework import status #type:ignore
 from rest_framework.views import APIView #type:ignore
 from rest_framework.response import Response #type:ignore
 from rest_framework_simplejwt.tokens import RefreshToken #type:ignore
-from django.contrib.auth import authenticate
+from rest_framework.throttling import UserRateThrottle #type:ignore
 from users.serializers.login import LoginSerializer
 
+class LoginThrottle(UserRateThrottle):
+    scope = 'login'
+
 class LoginView(APIView):
+    throttle_classes = [LoginThrottle]
+    permission_classes = []
+
     def post(self,request):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
 
-        user = authenticate(
-            email=serializer.validated_data['email'],
-            password=serializer.validated_data['password']
-        )
-
-        if user is not None:
-            refresh = RefreshToken.for_user(user)
-            return Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            })
-        return Response(
-            {'detail':'Invalid credentials'}, 
-            status=status.HTTP_401_UNAUTHORIZED
-        )
+        
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        })
+        

@@ -1,0 +1,2 @@
+from .product_full import ProductSerializer
+from .product_short import ProductShortListSerializer
