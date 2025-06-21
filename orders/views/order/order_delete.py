@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import generics #type:ignore
 from rest_framework.exceptions import ValidationError #type:ignore
 from rest_framework.throttling import UserRateThrottle #type:ignore
@@ -26,5 +27,11 @@ class OrderDeleteView(generics.DestroyAPIView):
             raise ValidationError(
                 f'You cant delete order which have status: {", ".join(forbidden)}'
             )
-        instance.delete()
+        
     
+        with transaction.atomic():
+            for item in instance.order_items.all():
+                product = item.product
+                product.quantity += item.quantity
+                product.save()
+            instance.delete()

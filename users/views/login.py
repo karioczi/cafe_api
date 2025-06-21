@@ -1,12 +1,22 @@
-from rest_framework import status #type:ignore
+from rest_framework import serializers #type:ignore
 from rest_framework.views import APIView #type:ignore
 from rest_framework.response import Response #type:ignore
 from rest_framework_simplejwt.tokens import RefreshToken #type:ignore
 from rest_framework.throttling import UserRateThrottle #type:ignore
+from drf_spectacular.utils import extend_schema #type:ignore
 from users.serializers.login import LoginSerializer
 
 class LoginThrottle(UserRateThrottle):
     scope = 'login'
+    
+class TokenSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+    acces = serializers.CharField()
+
+@extend_schema(
+    request=LoginSerializer,
+    responses={200: TokenSerializer}
+)
 
 class LoginView(APIView):
     throttle_classes = [LoginThrottle]

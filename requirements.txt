@@ -10,3 +10,4 @@ python-decouple==3.8  # Загрузка переменных из .env (есл�
 sqlparse==0.5.3  # Парсинг SQL-запросов, используется Django
 pytest>=7.4.0
 pytest-django>=4.5.2
+drf-spectacular[sidecar]==0.28.0

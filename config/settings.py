@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'users',
     'orders',
     'products',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 ]
 
 MIDDLEWARE = [
@@ -161,15 +163,22 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'user': '5/hour',
         'login': '3/hour',
-        'registration': '3/hour',
-        'password_reset': '3/hour',
-        'password_change': '5/minute',
-        'order_create': '30/minute',
+        'registration': '60/minute', #3/hour
+        'password_reset': '60/minute', #3/hour
+        'password_change': '60/minute', #5/minute
+        'order_create': '60/minute', #30/minute
         'order_delete': '60/minute',
         'order_detail': '60/minute',
         'order_list': '60/minute',
         'order_update': '60/minute'
-    }
+    },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Cafe API',
+    'DESCRIPTION': 'Documents for Cafe API',
+    'VERSION': '1.0.0',
 }
 
 SIMPLE_JWT = {

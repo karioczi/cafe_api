@@ -19,12 +19,26 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         for item_data in products_data:
             product = item_data['product']
             quantity = item_data['quantity']
+
+            if quantity > product.quantity:
+                raise serializers.ValidationError(
+                    f'Not enough {product.name}, available {product.quantity}.'
+                )
+            
+            if not product.is_active:
+                raise serializers.ValidationError(
+                    f'Product "{product.name}" is not available for ordering.'
+                )
+
             if product in combined:
                 combined[product] += quantity
             else:
                 combined[product] = quantity
 
         for product, quantity in combined.items():
+            product.quantity -= quantity
+            product.save()
+
             price = product.price
             OrderItem.objects.create(
                 order=order,
@@ -33,10 +47,10 @@ class OrderCreateSerializer(serializers.ModelSerializer):
                 price_at_order=price
             )
         return order
-    
+
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['products'] = OrderItemSerializer(
             instance.order_items.all(), many=True
         ).data
-        return rep
+        return rep 

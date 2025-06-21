@@ -1,4 +1,4 @@
-# Juniordown
+# Cafe API
 
 Проект REST API для кафе: пользователи, продукты и заказы. Реализован на Django, PostgreSQL, Docker.
 
