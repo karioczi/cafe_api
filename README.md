@@ -1,8 +1,8 @@
 # Cafe API
 
-Проект REST API для кафе: пользователи, продукты и заказы. Реализован на Django, PostgreSQL, Docker.
+REST API project for a café: users, products, and orders. Implemented using Django, PostgreSQL, and Docker.
 
-## Стек
+## Tech Stack
 
 - Python 3.11  
 - Django 5.2  
@@ -10,11 +10,25 @@
 - PostgreSQL  
 - Docker  
 
-## Установка
 
+## Installation
+
+Copy the repository to a convenient folder. 
 ```bash
-git clone https://github.com/karioczi/juniordown.git
-cd juniordown
+git clone https://github.com/karioczi/cafe_api.git
+cd cafe_api
+```
+Create an '.env' file in the root directory of the project.
+Open the '.env.examples file', set your password for the database in the ‘DB_PASSWORD’ field and copy all of its contents into the '.env' file.
+Rebuild the image and start the container.
+```bash
 docker-compose up --build
+```
+Make migrations
+```bash
 docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser  # опционально
+```
+You can also create a superuser (optionally).
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
