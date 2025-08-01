@@ -13,22 +13,25 @@ REST API project for a café: users, products, and orders. Implemented using Dja
 
 ## Installation
 
-Copy the repository to a convenient folder. 
+1. Copy the repository. 
 ```bash
 git clone https://github.com/karioczi/cafe_api.git
 cd cafe_api
 ```
-Create an '.env' file in the root directory of the project.
-Open the '.env.examples file', set your password for the database in the ‘DB_PASSWORD’ field and copy all of its contents into the '.env' file.
-Rebuild the image and start the container.
+2. Create a '.env' file in the project root:
+- Open the '.env.examples file', 
+- Set your own password in the ‘DB_PASSWORD’ field 
+- Copy all contents into the '.env' file.
+
+3. Rebuild the image and start the container.
 ```bash
 docker-compose up --build
 ```
-Make migrations
+4. Make migrations.
 ```bash
 docker-compose exec web python manage.py migrate
 ```
-You can also create a superuser (optionally).
+5. (Optional) Create superuser.
 ```bash
 docker-compose exec web python manage.py createsuperuser
 ```
