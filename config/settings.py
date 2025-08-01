@@ -161,8 +161,8 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_THROTTLE_RATES': {
-        'user': '5/hour',
-        'login': '3/hour',
+        'user': '60/minute', #5/hour
+        'login': '60/minute', #3/hour
         'registration': '60/minute', #3/hour
         'password_reset': '60/minute', #3/hour
         'password_change': '60/minute', #5/minute
