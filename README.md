@@ -2,6 +2,9 @@
 
 REST API project for a café: users, products, and orders. Implemented using Django, PostgreSQL, and Docker.
 
+## Project description:
+The API was developed for educational purposes in collaboration with ChatGPT to study the structure of Django projects and the principles of building REST APIs. During the process, the code was rewritten manually, the logic was analyzed, and the functionality was tested. In addition to the basic features, advanced functionality was added in stages. Topics such as working with Docker and the PostgreSQL database were also covered.
+
 ## Tech Stack
 
 - Python 3.11  
