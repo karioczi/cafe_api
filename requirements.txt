@@ -11,3 +11,4 @@ sqlparse==0.5.3  # Парсинг SQL-запросов, используется
 pytest>=7.4.0
 pytest-django>=4.5.2
 drf-spectacular[sidecar]==0.28.0
+django-allauth==0.61.1 #Авторизация через Google аккаунт
